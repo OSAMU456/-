@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
@@ -37,9 +39,12 @@ export default function Home() {
                   className="w-full px-4 py-3 text-gray-900 placeholder-gray-500 bg-transparent border-none focus:outline-none"
                 />
               </div>
-              <button className="bg-pink-600 text-white px-6 py-3 rounded-full hover:bg-pink-700 transition-colors">
+              <Link 
+                href="/search"
+                className="bg-pink-600 text-white px-6 py-3 rounded-full hover:bg-pink-700 transition-colors inline-block"
+              >
                 搜索
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -85,12 +90,13 @@ export default function Home() {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {['福冈', '东京', '大阪', '京都', '名古屋', '横滨', '神户', '奈良'].map((city) => (
-              <button 
+              <Link 
                 key={city}
-                className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
+                href={`/search?area=${encodeURIComponent(city)}`}
+                className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center block"
               >
                 <span className="font-semibold text-gray-900">{city}</span>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
@@ -105,9 +111,12 @@ export default function Home() {
             <button className="bg-white text-pink-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
               用户注册
             </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-pink-600 transition-colors">
+            <Link 
+              href="/admin"
+              className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-pink-600 transition-colors text-center"
+            >
               商家入驻
-            </button>
+            </Link>
           </div>
         </div>
       </section>

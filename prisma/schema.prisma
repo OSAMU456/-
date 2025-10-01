@@ -146,7 +146,8 @@ enum PostStatus {
 }
 
 enum SnsPlatform {
-  TWITTER
   INSTAGRAM
+  THREADS
   FACEBOOK
+  TWITTER
 }

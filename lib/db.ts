@@ -35,7 +35,7 @@ export interface Content {
 export interface SnsAccount {
   id: string;
   userId: string;
-  platform: 'TWITTER' | 'INSTAGRAM' | 'FACEBOOK';
+  platform: 'INSTAGRAM' | 'THREADS' | 'FACEBOOK' | 'TWITTER';
   accountId: string;
   accountName: string;
   accessToken: string;

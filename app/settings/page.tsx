@@ -1,7 +1,7 @@
 'use client'
 
 import { useSession } from 'next-auth/react'
-import { Palette, ArrowLeft, Plus, Twitter, Instagram, Facebook, Link as LinkIcon } from 'lucide-react'
+import { Palette, ArrowLeft, Plus, Instagram, MessageSquare, Facebook, Link as LinkIcon } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -48,40 +48,43 @@ export default function Settings() {
           
           <div className="p-6">
             <div className="space-y-4">
-              {/* Twitter/X */}
-              <div className="flex items-center justify-between p-4 border rounded-lg">
+              {/* Instagram - Priority 1 */}
+              <div className="flex items-center justify-between p-4 border-2 border-indigo-200 rounded-lg bg-indigo-50">
                 <div className="flex items-center">
-                  <div className="p-2 bg-black rounded-lg">
-                    <Twitter className="h-6 w-6 text-white" />
+                  <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
+                    <Instagram className="h-6 w-6 text-white" />
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-medium text-gray-900">X (formerly Twitter)</h4>
+                    <div className="flex items-center">
+                      <h4 className="font-medium text-gray-900">Instagram</h4>
+                      <span className="ml-2 px-2 py-0.5 text-xs font-semibold text-indigo-600 bg-indigo-100 rounded-full">Priority</span>
+                    </div>
+                    <p className="text-sm text-gray-600">Not connected</p>
+                  </div>
+                </div>
+                <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 flex items-center">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Connect
+                </button>
+              </div>
+
+              {/* Threads - Priority 2 */}
+              <div className="flex items-center justify-between p-4 border-2 border-indigo-200 rounded-lg bg-indigo-50">
+                <div className="flex items-center">
+                  <div className="p-2 bg-black rounded-lg">
+                    <MessageSquare className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="ml-4">
+                    <div className="flex items-center">
+                      <h4 className="font-medium text-gray-900">Threads</h4>
+                      <span className="ml-2 px-2 py-0.5 text-xs font-semibold text-indigo-600 bg-indigo-100 rounded-full">Priority</span>
+                    </div>
                     <p className="text-sm text-gray-600">Not connected</p>
                   </div>
                 </div>
                 <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 flex items-center">
                   <Plus className="h-4 w-4 mr-2" />
                   Connect
-                </button>
-              </div>
-
-              {/* Instagram */}
-              <div className="flex items-center justify-between p-4 border rounded-lg">
-                <div className="flex items-center">
-                  <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
-                    <Instagram className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="ml-4">
-                    <h4 className="font-medium text-gray-900">Instagram</h4>
-                    <p className="text-sm text-gray-600">Coming soon</p>
-                  </div>
-                </div>
-                <button 
-                  disabled
-                  className="bg-gray-300 text-gray-500 px-4 py-2 rounded-lg cursor-not-allowed flex items-center"
-                >
-                  <Plus className="h-4 w-4 mr-2" />
-                  Coming Soon
                 </button>
               </div>
 
@@ -93,15 +96,12 @@ export default function Settings() {
                   </div>
                   <div className="ml-4">
                     <h4 className="font-medium text-gray-900">Facebook</h4>
-                    <p className="text-sm text-gray-600">Coming soon</p>
+                    <p className="text-sm text-gray-600">Available for connection</p>
                   </div>
                 </div>
-                <button 
-                  disabled
-                  className="bg-gray-300 text-gray-500 px-4 py-2 rounded-lg cursor-not-allowed flex items-center"
-                >
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
                   <Plus className="h-4 w-4 mr-2" />
-                  Coming Soon
+                  Connect
                 </button>
               </div>
             </div>

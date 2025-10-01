@@ -8,24 +8,33 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       authorization: {
         params: {
-          scope: 'openid email profile https://www.googleapis.com/auth/spreadsheets.readonly'
+          scope: 'openid email profile https://www.googleapis.com/auth/spreadsheets.readonly',
+          access_type: 'offline',
+          prompt: 'consent'
         }
       }
     })
   ],
   callbacks: {
-    session: ({ session, token }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    }),
-    jwt: ({ user, token }) => {
+    async jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
+      }
       if (user) {
         token.uid = user.id;
       }
       return token;
+    },
+    async session({ session, token }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.sub,
+        },
+        accessToken: token.accessToken as string | undefined,
+      };
     },
   },
   pages: {

@@ -73,6 +73,8 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 🌐 Deployment to Google Cloud Platform
 
+**Status**: ✅ **Ready for Deployment** - See [DEPLOYMENT_READINESS.md](./DEPLOYMENT_READINESS.md) for verification details.
+
 Content Palette is optimized for deployment on Google Cloud Platform. See the comprehensive [DEPLOYMENT.md](./DEPLOYMENT.md) guide for detailed instructions.
 
 ### Quick Deploy Options
@@ -191,7 +193,9 @@ npm run lint
 
 ## 📚 Documentation
 
+- [Deployment Readiness Checklist](./DEPLOYMENT_READINESS.md) - Verify deployment status and requirements
 - [Deployment Guide (Japanese/English)](./DEPLOYMENT.md) - Complete GCP deployment instructions
+- [Copilot Agent Instructions](./.github/COPILOT_AGENT_INSTRUCTIONS.md) - Best practices for GitHub Copilot
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Google Cloud Documentation](https://cloud.google.com/docs)
 - [Instagram Graph API](https://developers.facebook.com/docs/instagram-api)
@@ -200,9 +204,10 @@ npm run lint
 ## 🤝 Support
 
 For questions or issues:
-1. Check the [DEPLOYMENT.md](./DEPLOYMENT.md) guide
-2. Review Google Cloud Platform documentation
-3. Check API provider documentation (Instagram, Threads, etc.)
+1. Check the [DEPLOYMENT_READINESS.md](./DEPLOYMENT_READINESS.md) checklist
+2. Review the [DEPLOYMENT.md](./DEPLOYMENT.md) guide
+3. Check Google Cloud Platform documentation
+4. Review API provider documentation (Instagram, Threads, etc.)
 
 ## 📝 License
 

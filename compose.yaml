@@ -1,0 +1,10 @@
+services:
+  napibuildutils:
+    image: napibuildutils
+    build:
+      context: node_modules/napi-build-utils
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000

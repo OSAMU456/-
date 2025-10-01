@@ -204,7 +204,7 @@ export default function Spreadsheets() {
               <h3 className="text-xl font-semibold text-gray-900 mb-2">No spreadsheets connected</h3>
               <p className="text-gray-600 mb-6 max-w-md mx-auto">
                 Connect your Google Sheets to start managing your social media content. 
-                We&apos;ll automatically import your content data and schedule posts.
+                We'll automatically import your content data and schedule posts.
               </p>
               
               <button 

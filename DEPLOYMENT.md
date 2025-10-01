@@ -4,6 +4,8 @@
 
 This guide explains how to deploy the Content Palette application to Google Cloud Platform (GCP).
 
+> 💡 **Quick Start**: 初めてデプロイする場合は、[DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md) をご覧ください。 / For first-time deployment, see [DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md) for a step-by-step guide.
+
 ## 前提条件 / Prerequisites
 
 1. **Google Cloudアカウント** / Google Cloud Account

@@ -73,7 +73,12 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 🌐 Deployment to Google Cloud Platform
 
-Content Palette is optimized for deployment on Google Cloud Platform. See the comprehensive [DEPLOYMENT.md](./DEPLOYMENT.md) guide for detailed instructions.
+Content Palette is optimized for deployment on Google Cloud Platform. 
+
+### 📖 Deployment Documentation
+
+- **[DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md)** - Step-by-step deployment checklist (日本語/English)
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Comprehensive deployment guide with detailed instructions
 
 ### Quick Deploy Options
 
@@ -103,7 +108,7 @@ gcloud run deploy content-palette --image content-palette
    - Set up secrets in Google Cloud Secret Manager
    - Configure OAuth callback URLs
 
-For complete deployment instructions in Japanese and English, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+**Ready to deploy?** Follow the [DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md) for a guided deployment process.
 
 ## 📋 Environment Variables
 
@@ -191,7 +196,12 @@ npm run lint
 
 ## 📚 Documentation
 
-- [Deployment Guide (Japanese/English)](./DEPLOYMENT.md) - Complete GCP deployment instructions
+### Deployment & Setup
+- [DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md) - Step-by-step deployment checklist (日本語/English)
+- [DEPLOYMENT.md](./DEPLOYMENT.md) - Complete GCP deployment instructions (日本語/English)
+- [COPILOT_AGENT_INSTRUCTIONS.md](./COPILOT_AGENT_INSTRUCTIONS.md) - Guidelines for GitHub Copilot development
+
+### External Resources
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Google Cloud Documentation](https://cloud.google.com/docs)
 - [Instagram Graph API](https://developers.facebook.com/docs/instagram-api)
@@ -200,9 +210,10 @@ npm run lint
 ## 🤝 Support
 
 For questions or issues:
-1. Check the [DEPLOYMENT.md](./DEPLOYMENT.md) guide
-2. Review Google Cloud Platform documentation
-3. Check API provider documentation (Instagram, Threads, etc.)
+1. Follow the [DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md) for deployment
+2. Check the [DEPLOYMENT.md](./DEPLOYMENT.md) troubleshooting section
+3. Review Google Cloud Platform documentation
+4. Check API provider documentation (Instagram, Threads, etc.)
 
 ## 📝 License
 

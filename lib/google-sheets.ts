@@ -39,7 +39,7 @@ export async function readSpreadsheetContent(
       if (dateStr) {
         try {
           scheduledDate = new Date(dateStr);
-        } catch (error) {
+        } catch {
           console.warn(`Invalid date format in row ${i + 1}: ${dateStr}`);
         }
       }

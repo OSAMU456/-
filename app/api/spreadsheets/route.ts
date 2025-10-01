@@ -54,11 +54,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Spreadsheet ID is required' }, { status: 400 });
     }
 
-    // For now, we'll use a mock access token since we don't have proper OAuth flow set up
-    const mockAccessToken = 'mock-token';
+    // Retrieve access token from session
+    const accessToken = session.accessToken || session.user?.accessToken;
+    if (!accessToken) {
+      return NextResponse.json({ error: 'No access token found. Please re-authenticate.' }, { status: 401 });
+    }
     
     try {
-      const metadata = await getSpreadsheetMetadata(spreadsheetId, mockAccessToken);
+      const metadata = await getSpreadsheetMetadata(spreadsheetId, accessToken);
       
       const spreadsheet = await createSpreadsheet({
         userId: user.id,

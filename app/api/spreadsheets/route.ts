@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Retrieve access token from session
-    const accessToken = session.accessToken || session.user?.accessToken;
+    const accessToken = session.accessToken;
     if (!accessToken) {
       return NextResponse.json({ error: 'No access token found. Please re-authenticate.' }, { status: 401 });
     }

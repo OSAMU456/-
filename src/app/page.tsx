@@ -1,101 +1,158 @@
+'use client';
+
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-pink-600">美丽预约</h1>
-              <span className="ml-2 text-sm text-gray-600">Beautiful Appointment</span>
-            </div>
-            <button className="bg-pink-600 text-white px-4 py-2 rounded-full text-sm hover:bg-pink-700 transition-colors">
-              登录
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrollY > 50 ? 'glass shadow-lg' : ''
+      }`}>
+        <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Link href="/" className="display-text text-3xl font-black gradient-text">
+            美丽预约
+          </Link>
+          <div className="flex items-center gap-6">
+            <Link href="/search" className="text-sm font-medium hover:text-[var(--primary)] transition-colors">
+              发现美容室
+            </Link>
+            <Link href="/admin" className="text-sm font-medium hover:text-[var(--primary)] transition-colors">
+              商家入驻
+            </Link>
+            <button className="btn-primary text-sm">
+              登录 / 注册
             </button>
           </div>
-        </div>
+        </nav>
       </header>
 
       {/* Hero Section */}
-      <section className="py-12 px-4 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            在日本寻找完美美容体验
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            专为中国朋友打造的日本美容室预约平台<br />
-            语言无障碍，服务有保障
-          </p>
-          
-          {/* Search Bar */}
-          <div className="bg-white rounded-full shadow-lg p-2 max-w-2xl mx-auto">
-            <div className="flex items-center">
-              <div className="flex-1 min-w-0">
-                <input 
-                  type="text" 
-                  placeholder="搜索地点、美容室或服务..." 
-                  className="w-full px-4 py-3 text-gray-900 placeholder-gray-500 bg-transparent border-none focus:outline-none"
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/10 via-[var(--secondary)]/10 to-[var(--accent)]/10 animate-pulse"></div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center max-w-4xl mx-auto animate-fade-in-up">
+            <h1 className="display-text text-6xl md:text-8xl font-black mb-6 leading-tight">
+              发现福冈
+              <br />
+              <span className="gradient-text">最美瞬间</span>
+            </h1>
+            <p className="text-xl md:text-2xl opacity-70 mb-12 font-light">
+              为在日中国人提供专业美容服务预约平台
+            </p>
+            
+            {/* Search Bar */}
+            <div className="card p-4 max-w-3xl mx-auto animate-scale-in">
+              <div className="flex flex-col md:flex-row gap-4">
+                <input
+                  type="text"
+                  placeholder="搜索美容室、服务项目..."
+                  className="flex-1 px-6 py-4 bg-[var(--muted)] border border-[var(--border)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all"
                 />
+                <Link href="/search" className="btn-primary whitespace-nowrap">
+                  🔍 立即搜索
+                </Link>
               </div>
-              <Link 
-                href="/search"
-                className="bg-pink-600 text-white px-6 py-3 rounded-full hover:bg-pink-700 transition-colors inline-block"
-              >
-                搜索
-              </Link>
             </div>
           </div>
         </div>
+
+        {/* Floating Elements */}
+        <div className="absolute top-40 left-10 w-20 h-20 bg-[var(--primary)]/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-40 right-10 w-32 h-32 bg-[var(--secondary)]/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
       </section>
 
-      {/* Features */}
-      <section className="py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h3 className="text-2xl font-bold text-center text-gray-900 mb-12">为什么选择美丽预约？</h3>
+      {/* Features Section */}
+      <section className="py-20 px-6 bg-[var(--muted)]">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="display-text text-5xl font-black text-center mb-16 animate-fade-in-up">
+            为什么选择<span className="gradient-text">美丽预约</span>
+          </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-              <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🗣️</span>
+            {[
+              {
+                icon: '🌟',
+                title: '精选美容室',
+                desc: '福冈地区优质美容室精选推荐',
+                delay: '0s'
+              },
+              {
+                icon: '💬',
+                title: '中文服务',
+                desc: '全程中文沟通，无语言障碍',
+                delay: '0.1s'
+              },
+              {
+                icon: '⚡',
+                title: '即时预约',
+                desc: '在线实时预约，方便快捷',
+                delay: '0.2s'
+              }
+            ].map((feature, idx) => (
+              <div
+                key={idx}
+                className="card p-8 text-center hover:scale-105 transition-transform animate-fade-in-up"
+                style={{ animationDelay: feature.delay }}
+              >
+                <div className="text-6xl mb-4 animate-float">{feature.icon}</div>
+                <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+                <p className="opacity-70">{feature.desc}</p>
               </div>
-              <h4 className="text-xl font-semibold mb-2">中文服务</h4>
-              <p className="text-gray-600">专业中文客服，支持中文沟通的美容师推荐</p>
-            </div>
-            
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-              <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">📍</span>
-              </div>
-              <h4 className="text-xl font-semibold mb-2">精准定位</h4>
-              <p className="text-gray-600">基于位置的智能推荐，找到最近的优质美容室</p>
-            </div>
-            
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-              <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">⏰</span>
-              </div>
-              <h4 className="text-xl font-semibold mb-2">即时预约</h4>
-              <p className="text-gray-600">实时查看空档，一键预约，无需等待</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Popular Areas */}
-      <section className="py-12 px-4 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <h3 className="text-2xl font-bold text-center text-gray-900 mb-8">热门地区</h3>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {['福冈', '东京', '大阪', '京都', '名古屋', '横滨', '神户', '奈良'].map((city) => (
-              <Link 
-                key={city}
-                href={`/search?area=${encodeURIComponent(city)}`}
-                className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center block"
+      {/* Popular Salons */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="display-text text-5xl font-black animate-fade-in-up">
+              热门<span className="gradient-text">美容室</span>
+            </h2>
+            <Link href="/search" className="btn-secondary animate-slide-in-right">
+              查看全部 →
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((item, idx) => (
+              <Link
+                key={item}
+                href={`/salon/${item}`}
+                className="card overflow-hidden group animate-fade-in-up"
+                style={{ animationDelay: `${idx * 0.1}s` }}
               >
-                <span className="font-semibold text-gray-900">{city}</span>
+                <div className="aspect-[4/3] bg-gradient-to-br from-[var(--primary)]/20 to-[var(--secondary)]/20 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
+                  <div className="absolute top-4 right-4 glass px-3 py-1 rounded-full text-sm font-semibold">
+                    ⭐ 4.9
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--primary)] transition-colors">
+                    Kraemer Paris 福冈店 {item}
+                  </h3>
+                  <p className="opacity-70 text-sm mb-4">
+                    专业法式美发沙龙 · 天神地区
+                  </p>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-semibold text-[var(--primary)]">¥3,500起</span>
+                    <span className="opacity-50">评价 128+</span>
+                  </div>
+                </div>
               </Link>
             ))}
           </div>
@@ -103,59 +160,65 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-pink-600 text-white text-center">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-3xl font-bold mb-4">开始您的美丽之旅</h3>
-          <p className="text-xl mb-8 opacity-90">立即注册，享受专属优惠</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-pink-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
-              用户注册
-            </button>
-            <Link 
-              href="/admin"
-              className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-pink-600 transition-colors text-center"
-            >
-              商家入驻
-            </Link>
-          </div>
+      <section className="py-20 px-6 bg-gradient-to-br from-[var(--primary)] via-[var(--secondary)] to-[var(--accent)] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h2 className="display-text text-5xl md:text-6xl font-black text-white mb-6 animate-fade-in-up">
+            开始你的美丽之旅
+          </h2>
+          <p className="text-xl text-white/90 mb-8 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            立即预约福冈最专业的美容服务
+          </p>
+          <button className="bg-white text-[var(--primary)] hover:bg-gray-100 font-bold py-4 px-12 rounded-xl text-lg transition-all hover:scale-105 shadow-2xl animate-scale-in" style={{ animationDelay: '0.2s' }}>
+            立即预约
+          </button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
+      <footer className="bg-[var(--muted)] py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h4 className="text-lg font-bold mb-4">美丽预约</h4>
-              <p className="text-gray-400">让美丽触手可及</p>
+              <h3 className="display-text text-2xl font-black gradient-text mb-4">美丽预约</h3>
+              <p className="text-sm opacity-70">
+                为在日中国人提供最专业的美容预约服务
+              </p>
             </div>
             <div>
-              <h5 className="font-semibold mb-4">用户服务</h5>
-              <ul className="space-y-2 text-gray-400">
-                <li>如何预约</li>
-                <li>服务条款</li>
-                <li>隐私政策</li>
+              <h4 className="font-bold mb-4">服务</h4>
+              <ul className="space-y-2 text-sm opacity-70">
+                <li><Link href="/search" className="hover:text-[var(--primary)] transition-colors">美容室搜索</Link></li>
+                <li><Link href="/search" className="hover:text-[var(--primary)] transition-colors">在线预约</Link></li>
+                <li><Link href="/admin" className="hover:text-[var(--primary)] transition-colors">商家入驻</Link></li>
               </ul>
             </div>
             <div>
-              <h5 className="font-semibold mb-4">商家服务</h5>
-              <ul className="space-y-2 text-gray-400">
-                <li>商家入驻</li>
-                <li>管理后台</li>
-                <li>营销推广</li>
+              <h4 className="font-bold mb-4">支持</h4>
+              <ul className="space-y-2 text-sm opacity-70">
+                <li><a href="#" className="hover:text-[var(--primary)] transition-colors">帮助中心</a></li>
+                <li><a href="#" className="hover:text-[var(--primary)] transition-colors">联系我们</a></li>
+                <li><a href="#" className="hover:text-[var(--primary)] transition-colors">常见问题</a></li>
               </ul>
             </div>
             <div>
-              <h5 className="font-semibold mb-4">联系我们</h5>
-              <ul className="space-y-2 text-gray-400">
-                <li>客服热线</li>
-                <li>微信客服</li>
-                <li>意见反馈</li>
-              </ul>
+              <h4 className="font-bold mb-4">关注我们</h4>
+              <div className="flex gap-4">
+                <a href="#" className="w-10 h-10 bg-[var(--primary)] rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
+                  R
+                </a>
+                <a href="#" className="w-10 h-10 bg-[var(--secondary)] rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
+                  W
+                </a>
+              </div>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 美丽预约. All rights reserved.</p>
+          <div className="border-t border-[var(--border)] pt-8 text-center text-sm opacity-70">
+            <p>© 2025 美丽预约 Meiliyuyue. All rights reserved.</p>
           </div>
         </div>
       </footer>

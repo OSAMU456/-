@@ -46,7 +46,56 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - **Frontend**: Next.js 15, React 19, TypeScript
 - **Styling**: Tailwind CSS
 - **Language**: TypeScript
-- **Target Deployment**: Vercel
+- **Infrastructure**: Google Cloud Platform
+
+### Google Cloud Platform インフラ
+
+- **Hosting**: Cloud Run (サーバーレスコンテナ)
+- **Database**: Cloud SQL (PostgreSQL 15)
+- **Storage**: Cloud Storage + Cloud CDN
+- **CI/CD**: Cloud Build / GitHub Actions
+- **Secrets**: Secret Manager
+- **Monitoring**: Cloud Logging & Monitoring
+- **Region**: asia-northeast1 (東京)
+
+## ☁️ Google Cloud デプロイメント
+
+### 初回セットアップ
+
+```bash
+# GCPプロジェクトとインフラをセットアップ
+./scripts/setup-gcp.sh
+
+# 環境変数を設定
+cp .env.example .env
+# .envファイルを編集してGCP設定を追加
+```
+
+### デプロイ方法
+
+#### オプション1: デプロイスクリプト使用
+
+```bash
+./scripts/deploy-gcp.sh
+```
+
+#### オプション2: Cloud Build使用
+
+```bash
+gcloud builds submit --config=cloudbuild.yaml
+```
+
+#### オプション3: Terraform使用
+
+```bash
+cd terraform
+terraform init
+terraform apply
+```
+
+### 詳細なデプロイ手順
+
+詳細は [DEPLOYMENT.md](./DEPLOYMENT.md) を参照してください。
 
 ## 部署目标 (Deployment Target)
 

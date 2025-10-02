@@ -1,290 +1,290 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 
-// Mock data for demonstration
-const mockSalon = {
-  id: 1,
-  name: 'Tokyo Beauty Studio',
-  chineseName: '东京美丽工作室',
-  rating: 4.8,
-  reviewCount: 127,
-  price: '¥3,000-8,000',
-  address: '东京都涩谷区道玄坂1-2-3',
-  phone: '03-1234-5678',
-  hours: '10:00-20:00',
-  description: '位于涩谷中心的专业美容沙龙，拥有经验丰富的中文服务团队。我们专注于为每位顾客提供个性化的造型设计，无论是日常护理还是特殊场合的造型，都能满足您的需求。',
-  tags: ['中文服务', '染发专家', '现代风格'],
-  chineseStaff: true,
-  images: [
-    '/api/placeholder/400/300',
-    '/api/placeholder/400/300',
-    '/api/placeholder/400/300'
-  ]
-};
-
-const mockStaff = [
-  {
-    id: 1,
-    name: '田中美香',
-    chineseName: '田中美香',
-    speciality: '染发・造型',
-    experience: '8年',
-    languages: ['日语', '中文'],
-    image: '/api/placeholder/150/150'
-  },
-  {
-    id: 2,
-    name: '佐藤花子',
-    chineseName: '佐藤花子',
-    speciality: '剪发・护理',
-    experience: '5年',
-    languages: ['日语'],
-    image: '/api/placeholder/150/150'
-  }
-];
-
-const mockServices = [
-  { name: '剪发', price: '¥3,000-5,000', duration: '60分钟' },
-  { name: '染发', price: '¥6,000-8,000', duration: '120分钟' },
-  { name: '烫发', price: '¥8,000-12,000', duration: '150分钟' },
-  { name: '护理', price: '¥2,000-3,000', duration: '45分钟' }
-];
-
-export default function SalonDetailPage() {
-  const [selectedImage, setSelectedImage] = useState(0);
-  const [selectedDate, setSelectedDate] = useState('');
+export default function SalonDetailPage({ params }: { params: { id: string } }) {
+  const [selectedTab, setSelectedTab] = useState('about');
+  const [selectedDate, setSelectedDate] = useState('2025-10-10');
   const [selectedTime, setSelectedTime] = useState('');
-  const [selectedStaff, setSelectedStaff] = useState('');
 
-  const availableTimes = ['10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+  const tabs = [
+    { id: 'about', label: '关于我们' },
+    { id: 'menu', label: '服务项目' },
+    { id: 'stylist', label: '发型师' },
+    { id: 'reviews', label: '评价' },
+  ];
+
+  const timeSlots = [
+    '10:00', '10:30', '11:00', '11:30', '12:00', '13:00',
+    '14:00', '14:30', '15:00', '16:00', '17:00', '18:00'
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <Link href="/search" className="mr-4 text-pink-600">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </Link>
-              <h1 className="text-xl font-bold text-gray-900">美容室详情</h1>
-            </div>
-            <button className="text-pink-600">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.486 4.486 0 000 6.364L12 20.364l7.682-7.682a4.486 4.486 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.486 4.486 0 00-6.364 0z" />
-              </svg>
+    <div className="min-h-screen bg-background">
+      {/* Fixed Header */}
+      <header className="glass fixed top-0 w-full z-50 shadow-lg">
+        <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Link href="/" className="display-text text-2xl font-black gradient-text">
+            美丽预约
+          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/search" className="text-sm font-medium hover:text-[var(--primary)] transition-colors">
+              返回搜索
+            </Link>
+            <button className="btn-primary text-sm py-2 px-6">
+              登录
             </button>
           </div>
-        </div>
+        </nav>
       </header>
 
-      {/* Images */}
-      <div className="bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="aspect-w-16 aspect-h-9 md:aspect-h-6">
-            <div className="h-64 md:h-80 bg-gradient-to-br from-pink-100 to-pink-200 flex items-center justify-center">
-              <span className="text-4xl">💇‍♀️</span>
-            </div>
-          </div>
-          <div className="flex space-x-2 p-4 overflow-x-auto">
-            {mockSalon.images.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedImage(index)}
-                className={`w-16 h-16 bg-gradient-to-br from-pink-100 to-pink-200 rounded-lg flex-shrink-0 flex items-center justify-center ${
-                  selectedImage === index ? 'ring-2 ring-pink-500' : ''
-                }`}
-              >
-                <span className="text-sm">💄</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Salon Info */}
-      <div className="bg-white mt-2">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <h1 className="text-2xl font-bold text-gray-900">{mockSalon.chineseName}</h1>
-              <p className="text-gray-600">{mockSalon.name}</p>
-              <div className="flex items-center mt-2">
-                <div className="flex items-center">
-                  <span className="text-yellow-400 text-lg">★</span>
-                  <span className="text-gray-600 ml-1">{mockSalon.rating}</span>
-                  <span className="text-gray-400 ml-1">({mockSalon.reviewCount}条评价)</span>
-                </div>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-2xl font-bold text-pink-600">{mockSalon.price}</p>
+      <div className="pt-20">
+        {/* Hero Section */}
+        <div className="relative h-96 bg-gradient-to-br from-[var(--primary)]/20 via-[var(--secondary)]/20 to-[var(--accent)]/20">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-7xl mb-4 animate-float">✨</div>
+              <p className="text-sm opacity-60">美容室图片</p>
             </div>
           </div>
           
-          <div className="mt-4 flex flex-wrap gap-2">
-            {mockSalon.tags.map(tag => (
-              <span 
-                key={tag} 
-                className={`px-3 py-1 text-sm rounded-full ${
-                  tag === '中文服务' 
-                    ? 'bg-green-100 text-green-800' 
-                    : 'bg-gray-100 text-gray-600'
-                }`}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          
-          <p className="mt-4 text-gray-700">{mockSalon.description}</p>
-        </div>
-      </div>
-
-      {/* Contact Info */}
-      <div className="bg-white mt-2">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">联系信息</h2>
-          <div className="space-y-3">
-            <div className="flex items-center">
-              <svg className="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span className="text-gray-700">{mockSalon.address}</span>
-            </div>
-            <div className="flex items-center">
-              <svg className="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              <span className="text-gray-700">{mockSalon.phone}</span>
-            </div>
-            <div className="flex items-center">
-              <svg className="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span className="text-gray-700">营业时间: {mockSalon.hours}</span>
-            </div>
+          {/* Badges */}
+          <div className="absolute top-6 left-6 flex gap-2">
+            <span className="glass px-4 py-2 rounded-full text-sm font-semibold">中文服务</span>
+            <span className="glass px-4 py-2 rounded-full text-sm font-semibold">⭐ 4.9</span>
           </div>
         </div>
-      </div>
 
-      {/* Services */}
-      <div className="bg-white mt-2">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">服务项目</h2>
-          <div className="space-y-3">
-            {mockServices.map((service, index) => (
-              <div key={index} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                <div>
-                  <h3 className="font-semibold text-gray-900">{service.name}</h3>
-                  <p className="text-sm text-gray-600">时长: {service.duration}</p>
-                </div>
-                <div className="text-right">
-                  <p className="font-semibold text-pink-600">{service.price}</p>
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-2">
+              {/* Salon Header */}
+              <div className="mb-8 animate-fade-in-up">
+                <h1 className="display-text text-5xl font-black mb-3">
+                  Kraemer Paris 福冈天神店
+                </h1>
+                <p className="text-xl opacity-70 mb-4">
+                  来自巴黎的顶级发型沙龙，为您打造专属风格
+                </p>
+                <div className="flex flex-wrap gap-4 text-sm">
+                  <span className="flex items-center gap-2">
+                    📍 福冈市中央区天神2-3-10
+                  </span>
+                  <span className="flex items-center gap-2">
+                    ⏰ 10:00 - 20:00
+                  </span>
+                  <span className="flex items-center gap-2">
+                    💬 支持中文
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
-      {/* Staff */}
-      <div className="bg-white mt-2">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">美容师团队</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {mockStaff.map(staff => (
-              <div key={staff.id} className="border border-gray-200 rounded-lg p-4">
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-pink-100 to-pink-200 rounded-full flex items-center justify-center">
-                    <span className="text-xl">👩‍💼</span>
+              {/* Tabs */}
+              <div className="card mb-6 animate-scale-in">
+                <div className="flex border-b border-[var(--border)] overflow-x-auto">
+                  {tabs.map((tab) => (
+                    <button
+                      key={tab.id}
+                      onClick={() => setSelectedTab(tab.id)}
+                      className={`px-6 py-4 font-semibold whitespace-nowrap transition-colors ${
+                        selectedTab === tab.id
+                          ? 'text-[var(--primary)] border-b-2 border-[var(--primary)]'
+                          : 'opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="p-6">
+                  {selectedTab === 'about' && (
+                    <div className="space-y-4 animate-fade-in">
+                      <h3 className="text-2xl font-bold mb-4">关于我们</h3>
+                      <p className="leading-relaxed opacity-80">
+                        Kraemer Paris 是来自法国巴黎的顶级发型沙龙，在日本开设多家分店。
+                        我们拥有经验丰富的发型师团队，专注于为每位客户打造最适合的发型。
+                      </p>
+                      <p className="leading-relaxed opacity-80">
+                        我们提供中文服务，让中国客户在日本也能享受无语言障碍的美容体验。
+                        使用高品质的染发和护理产品，确保您的头发健康美丽。
+                      </p>
+                      
+                      <div className="grid md:grid-cols-2 gap-4 mt-6">
+                        <div className="bg-[var(--muted)] p-4 rounded-xl">
+                          <div className="text-3xl mb-2">🏆</div>
+                          <h4 className="font-bold mb-1">专业团队</h4>
+                          <p className="text-sm opacity-70">10年以上经验的发型师</p>
+                        </div>
+                        <div className="bg-[var(--muted)] p-4 rounded-xl">
+                          <div className="text-3xl mb-2">🎨</div>
+                          <h4 className="font-bold mb-1">个性定制</h4>
+                          <p className="text-sm opacity-70">根据您的风格量身打造</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedTab === 'menu' && (
+                    <div className="space-y-4 animate-fade-in">
+                      <h3 className="text-2xl font-bold mb-4">服务项目</h3>
+                      {[
+                        { name: '剪发', price: '¥3,500', time: '60分钟', desc: '专业剪发，包含洗发和造型' },
+                        { name: '染发', price: '¥8,000', time: '120分钟', desc: '全头染发，包含护理和造型' },
+                        { name: '烫发', price: '¥12,000', time: '150分钟', desc: '专业烫发，包含护理和造型' },
+                        { name: '护理', price: '¥2,500', time: '30分钟', desc: '深层头发护理，修复受损发质' },
+                      ].map((service, idx) => (
+                        <div key={idx} className="bg-[var(--muted)] p-5 rounded-xl flex justify-between items-start">
+                          <div>
+                            <h4 className="text-lg font-bold mb-2">{service.name}</h4>
+                            <p className="text-sm opacity-70 mb-2">{service.desc}</p>
+                            <p className="text-sm opacity-50">⏱ {service.time}</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-2xl font-bold text-[var(--primary)]">{service.price}</p>
+                            <button className="mt-2 text-sm font-medium hover:underline">
+                              预约
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {selectedTab === 'stylist' && (
+                    <div className="space-y-4 animate-fade-in">
+                      <h3 className="text-2xl font-bold mb-4">我们的发型师</h3>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {[
+                          { name: '田中 美子', title: '首席设计师', exp: '15年', lang: '日语、中文' },
+                          { name: '佐藤 健', title: '高级设计师', exp: '12年', lang: '日语、英语' },
+                          { name: '李 明', title: '设计师', exp: '8年', lang: '中文、日语' },
+                          { name: '王 芳', title: '设计师', exp: '6年', lang: '中文、日语' },
+                        ].map((stylist, idx) => (
+                          <div key={idx} className="card p-5">
+                            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[var(--primary)]/30 to-[var(--secondary)]/30 mb-4 flex items-center justify-center text-3xl">
+                              👤
+                            </div>
+                            <h4 className="text-lg font-bold mb-1">{stylist.name}</h4>
+                            <p className="text-sm opacity-70 mb-2">{stylist.title}</p>
+                            <p className="text-sm opacity-50">经验: {stylist.exp}</p>
+                            <p className="text-sm opacity-50">语言: {stylist.lang}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedTab === 'reviews' && (
+                    <div className="space-y-4 animate-fade-in">
+                      <div className="flex items-center justify-between mb-6">
+                        <h3 className="text-2xl font-bold">客户评价</h3>
+                        <div className="text-right">
+                          <div className="text-3xl font-black gradient-text">4.9</div>
+                          <div className="text-sm opacity-60">基于 128 条评价</div>
+                        </div>
+                      </div>
+
+                      {[
+                        { name: '张小姐', rating: 5, date: '2025-09-28', comment: '非常专业的服务！发型师很耐心，中文沟通无障碍。做出来的发型超满意！' },
+                        { name: '李先生', rating: 5, date: '2025-09-25', comment: '环境优雅，服务周到。价格合理，下次还会再来。' },
+                        { name: '王女士', rating: 4, date: '2025-09-20', comment: '整体不错，发型师技术很好，就是等待时间稍长。' },
+                      ].map((review, idx) => (
+                        <div key={idx} className="bg-[var(--muted)] p-5 rounded-xl">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-3">
+                              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--primary)]/30 to-[var(--secondary)]/30 flex items-center justify-center font-bold">
+                                {review.name[0]}
+                              </div>
+                              <div>
+                                <h4 className="font-bold">{review.name}</h4>
+                                <p className="text-sm opacity-50">{review.date}</p>
+                              </div>
+                            </div>
+                            <div className="flex">
+                              {[...Array(review.rating)].map((_, i) => (
+                                <span key={i} className="text-yellow-500">⭐</span>
+                              ))}
+                            </div>
+                          </div>
+                          <p className="opacity-80">{review.comment}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar - Booking */}
+            <div className="lg:col-span-1">
+              <div className="card p-6 sticky top-24 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                <h3 className="text-2xl font-bold mb-6">立即预约</h3>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">选择日期</label>
+                    <input
+                      type="date"
+                      value={selectedDate}
+                      onChange={(e) => setSelectedDate(e.target.value)}
+                      className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                    />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900">{staff.chineseName}</h3>
-                    <p className="text-sm text-gray-600">{staff.speciality}</p>
-                    <p className="text-sm text-gray-500">经验: {staff.experience}</p>
-                    <div className="flex space-x-1 mt-1">
-                      {staff.languages.map(lang => (
-                        <span key={lang} className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded">
-                          {lang}
-                        </span>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">选择时间</label>
+                    <div className="grid grid-cols-3 gap-2 max-h-64 overflow-y-auto">
+                      {timeSlots.map((time) => (
+                        <button
+                          key={time}
+                          onClick={() => setSelectedTime(time)}
+                          className={`py-2 rounded-lg text-sm font-medium transition-all ${
+                            selectedTime === time
+                              ? 'bg-[var(--primary)] text-white'
+                              : 'bg-[var(--muted)] hover:bg-[var(--border)]'
+                          }`}
+                        >
+                          {time}
+                        </button>
                       ))}
                     </div>
                   </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">选择服务</label>
+                    <select className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--primary)]">
+                      <option>剪发 - ¥3,500</option>
+                      <option>染发 - ¥8,000</option>
+                      <option>烫发 - ¥12,000</option>
+                      <option>护理 - ¥2,500</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2">选择发型师（可选）</label>
+                    <select className="w-full px-4 py-3 bg-[var(--muted)] border border-[var(--border)] rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--primary)]">
+                      <option>随机分配</option>
+                      <option>田中 美子</option>
+                      <option>佐藤 健</option>
+                      <option>李 明</option>
+                      <option>王 芳</option>
+                    </select>
+                  </div>
+
+                  <button className="w-full btn-primary py-4 text-base font-bold">
+                    确认预约
+                  </button>
+
+                  <div className="text-center text-sm opacity-60 mt-4">
+                    预约后将收到确认短信
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Booking Section */}
-      <div className="bg-white mt-2 pb-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">在线预约</h2>
-          
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">选择美容师</label>
-              <select 
-                value={selectedStaff}
-                onChange={(e) => setSelectedStaff(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
-              >
-                <option value="">请选择美容师</option>
-                {mockStaff.map(staff => (
-                  <option key={staff.id} value={staff.id}>{staff.chineseName}</option>
-                ))}
-              </select>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">选择日期</label>
-              <input 
-                type="date"
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">选择时间</label>
-              <div className="grid grid-cols-4 gap-2">
-                {availableTimes.map(time => (
-                  <button
-                    key={time}
-                    onClick={() => setSelectedTime(time)}
-                    className={`py-2 px-3 text-sm rounded-lg border ${
-                      selectedTime === time
-                        ? 'bg-pink-600 text-white border-pink-600'
-                        : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-                    }`}
-                  >
-                    {time}
-                  </button>
-                ))}
-              </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Fixed Bottom Booking Button */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
-        <div className="max-w-7xl mx-auto">
-          <button 
-            className="w-full bg-pink-600 text-white py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors disabled:bg-gray-300"
-            disabled={!selectedStaff || !selectedDate || !selectedTime}
-          >
-            确认预约
-          </button>
         </div>
       </div>
     </div>

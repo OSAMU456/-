@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Salon } from '@/types';
-import { Star, MapPin, Clock, DollarSign } from 'lucide-react';
+import { Star, MapPin, DollarSign } from 'lucide-react';
 
 interface SalonCardProps {
   salon: Salon;

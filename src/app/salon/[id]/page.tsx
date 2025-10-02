@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function SalonDetailPage({ params }: { params: { id: string } }) {
+export default function SalonDetailPage() {
   const [selectedTab, setSelectedTab] = useState('about');
   const [selectedDate, setSelectedDate] = useState('2025-10-10');
   const [selectedTime, setSelectedTime] = useState('');

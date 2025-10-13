@@ -1,213 +1,107 @@
-# Content Palette - AI SNS Auto-Posting Application
+# 美丽预约 (Beautiful Appointment)
 
-Content Palette is an AI-powered social media automation tool that helps you manage and optimize your SNS posts using Google Sheets as a content management system.
+A beauty salon booking portal designed for Chinese visitors and residents in Japan. This platform bridges the language barrier and provides a seamless booking experience for beauty services.
 
-## 🌟 Features
+## 项目概述 (Project Overview)
 
-### Core Features (High Priority)
-- 🔐 **Google OAuth Authentication** - Secure login with Google accounts
-- 📊 **Google Sheets Integration** - Import and manage content from Google Spreadsheets
-- 📱 **SNS Account Linking** - Connect your social media accounts (Instagram, Threads, Facebook)
-- ⏰ **Auto-posting Scheduler** - Schedule posts automatically based on spreadsheet data
-- 👀 **Post Preview** - Preview how posts will look before publishing
+「美丽预约」是专为访日・在日中国人打造的美容室检索・预约门户网站。我们的目标是消除语言障碍，为日本美容室提供新的获客渠道。
 
-### Priority Platforms
-- **Instagram** 📸 - Primary platform for visual content
-- **Threads** 💬 - Primary platform for text-based conversations
-- **Facebook** 👥 - Additional platform support
+### 主要功能 (Main Features)
 
-### AI Features (Medium Priority)
-- 📈 **Performance Analytics** - Track engagement, likes, comments, and shares
-- 🎯 **Engagement Prediction** - AI-powered prediction of post performance
-- 💡 **Optimal Posting Suggestions** - AI recommendations for best posting times
-- 🔍 **Content Optimization** - Suggestions for hashtags and content improvements
+**用户功能 (User Features):**
+- 微信等社交媒体登录 (WeChat & SNS Login)
+- 多样化搜索功能：地区、当前位置、中文服务人员 (Advanced Search: Area, Location, Chinese-speaking Staff)
+- 沙龙、员工、发型详细信息查看 (Detailed Salon, Staff & Style Information)
+- 实时在线预约功能 (Real-time Online Booking)
 
-### Additional Features (Low Priority)
-- 📅 **Calendar View** - Visual scheduling interface
-- 🔔 **Notifications** - Email alerts for posting status
-- 🎨 **Advanced UI/UX** - Intuitive and beautiful interface
+**商家功能 (Business Features):**
+- 沙龙信息管理系统 (Salon Information Management)
+- 员工出勤状态更新 (Staff Schedule Management)
+- 发型作品上传管理 (Style Portfolio Management)
+- 预约状况日历管理 (Booking Calendar Management)
 
-## 🛠 Technology Stack
+### 技术特点 (Technical Features)
 
-- **Frontend**: Next.js 15 with TypeScript and Tailwind CSS
-- **Backend**: Next.js API Routes
-- **Authentication**: NextAuth.js with Google OAuth
-- **Database**: SQLite with Prisma ORM (Development) / PostgreSQL (Production)
-- **Integrations**: Google Sheets API, Instagram Graph API, Threads API
-- **Scheduling**: Node-cron for automated posting
-- **Deployment**: Google Cloud Platform (App Engine / Cloud Run)
+- 移动优先设计 (Mobile-First Design)
+- 简体中文界面 (Simplified Chinese Interface)
+- 响应式布局 (Responsive Layout)
+- 现代化技术栈 (Modern Tech Stack)
 
-## 🚀 Quick Start
+## 开始使用 (Getting Started)
 
-### Prerequisites
-- Node.js 20.x or later
-- npm or yarn
-- Google Cloud account (for deployment)
+First, run the development server:
 
-### Local Development
-
-1. **Clone the repository**
-```bash
-git clone <repository-url>
-cd content-palette
-```
-
-2. **Install dependencies**
-```bash
-npm install
-```
-
-3. **Set up environment variables**
-```bash
-cp .env.example .env.local
-# Edit .env.local with your API credentials
-```
-
-4. **Run the development server**
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
 
-5. **Open your browser**
-Navigate to [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🌐 Deployment to Google Cloud Platform
+## 技术栈 (Tech Stack)
 
-Content Palette is optimized for deployment on Google Cloud Platform. See the comprehensive [DEPLOYMENT.md](./DEPLOYMENT.md) guide for detailed instructions.
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS
+- **Language**: TypeScript
+- **Infrastructure**: Google Cloud Platform
 
-### Quick Deploy Options
+### Google Cloud Platform インフラ
 
-#### Option 1: Google App Engine (Recommended)
+- **Hosting**: Cloud Run (サーバーレスコンテナ)
+- **Database**: Cloud SQL (PostgreSQL 15)
+- **Storage**: Cloud Storage + Cloud CDN
+- **CI/CD**: Cloud Build / GitHub Actions
+- **Secrets**: Secret Manager
+- **Monitoring**: Cloud Logging & Monitoring
+- **Region**: asia-northeast1 (東京)
+
+## ☁️ Google Cloud デプロイメント
+
+### 初回セットアップ
+
 ```bash
-gcloud app deploy
+# GCPプロジェクトとインフラをセットアップ
+./scripts/setup-gcp.sh
+
+# 環境変数を設定
+cp .env.example .env
+# .envファイルを編集してGCP設定を追加
 ```
 
-#### Option 2: Cloud Run (Container-based)
+### デプロイ方法
+
+#### オプション1: デプロイスクリプト使用
+
 ```bash
-docker build -t content-palette .
-gcloud run deploy content-palette --image content-palette
+./scripts/deploy-gcp.sh
 ```
 
-### Required Setup
+#### オプション2: Cloud Build使用
 
-1. **Google Cloud Project**
-   - Create a new project in [Google Cloud Console](https://console.cloud.google.com/)
-   - Enable billing (free tier available)
-
-2. **API Credentials**
-   - Google OAuth 2.0 credentials
-   - Instagram Graph API access
-   - Threads API access
-
-3. **Environment Variables**
-   - Set up secrets in Google Cloud Secret Manager
-   - Configure OAuth callback URLs
-
-For complete deployment instructions in Japanese and English, see [DEPLOYMENT.md](./DEPLOYMENT.md).
-
-## 📋 Environment Variables
-
-Copy `.env.example` to `.env.local` and configure:
-
-### Required Variables
-- `NEXTAUTH_SECRET` - Authentication secret key
-- `GOOGLE_CLIENT_ID` - Google OAuth client ID
-- `GOOGLE_CLIENT_SECRET` - Google OAuth client secret
-- `INSTAGRAM_APP_ID` - Instagram app ID
-- `INSTAGRAM_APP_SECRET` - Instagram app secret
-- `THREADS_APP_ID` - Threads app ID
-- `THREADS_APP_SECRET` - Threads app secret
-
-### Production Variables
-- `DATABASE_URL` - PostgreSQL connection string (for production)
-- `NEXTAUTH_URL` - Your deployed application URL
-- `GCP_PROJECT_ID` - Google Cloud project ID
-
-## 🔧 Development
-
-### Build for Production
 ```bash
-npm run build
+gcloud builds submit --config=cloudbuild.yaml
 ```
 
-### Start Production Server
+#### オプション3: Terraform使用
+
 ```bash
-npm start
+cd terraform
+terraform init
+terraform apply
 ```
 
-### Linting
-```bash
-npm run lint
-```
+### 詳細なデプロイ手順
 
-## 📱 Platform Support
+詳細は [DEPLOYMENT.md](./DEPLOYMENT.md) を参照してください。
 
-### Instagram (Priority)
-- Post scheduling and automation
-- Image and video support
-- Caption and hashtag optimization
-- Analytics and insights
+## 部署目标 (Deployment Target)
 
-### Threads (Priority)
-- Text post automation
-- Thread support (multiple connected posts)
-- Engagement tracking
-- Best time to post analysis
-
-### Facebook
-- Page post automation
-- Multi-format content support
-- Audience insights
-
-## 🎯 User Journey
-
-1. **Sign In** with Google account
-2. **Connect Google Sheets** containing your content calendar
-3. **Link Social Accounts** (Instagram, Threads, Facebook)
-4. **Review & Schedule** posts automatically from spreadsheet
-5. **Monitor Performance** with AI-powered analytics
-
-## 📊 Cost Estimation (Google Cloud)
-
-### Small Scale (10,000 requests/month)
-- App Engine: $0-5/month
-- Cloud SQL: $0-7/month
-- Total: **~$7-12/month**
-
-### Medium Scale (100,000 requests/month)
-- App Engine: $20-50/month
-- Cloud SQL: $25/month
-- Total: **~$50-80/month**
-
-*Free tier can support initial deployment under $10/month*
-
-## 🔐 Security
-
-- OAuth 2.0 authentication
-- Environment-based configuration
-- API credential encryption
-- Secure session management
-- HTTPS-only in production
-
-## 📚 Documentation
-
-- [Deployment Guide (Japanese/English)](./DEPLOYMENT.md) - Complete GCP deployment instructions
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Google Cloud Documentation](https://cloud.google.com/docs)
-- [Instagram Graph API](https://developers.facebook.com/docs/instagram-api)
-- [Threads API](https://developers.facebook.com/docs/threads)
-
-## 🤝 Support
-
-For questions or issues:
-1. Check the [DEPLOYMENT.md](./DEPLOYMENT.md) guide
-2. Review Google Cloud Platform documentation
-3. Check API provider documentation (Instagram, Threads, etc.)
-
-## 📝 License
-
-This project is private and proprietary.
+初期将在福岡等主要城市展开，未来计划扩展至全日本。
+(Initially targeting major cities like Fukuoka, with plans to expand nationwide)
 
 ---
 
-**Built with ❤️ using Next.js, TypeScript, and Google Cloud Platform**
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).

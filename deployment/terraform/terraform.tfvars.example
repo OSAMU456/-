@@ -1,0 +1,7 @@
+# Terraform variables example
+# Copy this file to terraform.tfvars and fill in your values
+
+project_id  = "your-gcp-project-id"
+region      = "asia-northeast1"
+domain_name = "meiliyuyue.com"
+environment = "production"

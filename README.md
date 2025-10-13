@@ -1,6 +1,214 @@
-# 美丽预约 (Beautiful Appointment)
+# 🌸 美丽预约 (Meiliyuyue) - Beauty Salon Appointment Portal
 
-A beauty salon booking portal designed for Chinese visitors and residents in Japan. This platform bridges the language barrier and provides a seamless booking experience for beauty services.
+福岡の美容院予約ポータル - 中国人観光客向けの多言語対応予約システム
+
+🌐 **本番サイト**: https://beauty-appointment-portal.vercel.app  
+📋 **管理画面**: https://beauty-appointment-portal.vercel.app/admin
+
+---
+
+## ✨ 主な機能
+
+- 🏪 **サロン検索**: 福岡の人気美容院を閲覧
+- 🔍 **詳細フィルター**: サービス、価格、評価で絞り込み
+- 📅 **簡単予約**: シンプルな予約システム
+- 🌙 **ダークモード**: 美しいダークテーマ対応
+- 📱 **レスポンシブ**: すべてのデバイスで快適
+- 🎨 **モダンUI**: 洗練されたインターフェース
+- 🌏 **多言語対応**: 中国語・日本語対応
+
+---
+
+## 🛠️ 技術スタック
+
+- **フレームワーク**: Next.js 15.5.4 (App Router)
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS
+- **アイコン**: Lucide React
+- **デプロイ**: Vercel
+
+---
+
+## 🚀 クイックスタート
+
+### 必要な環境
+
+- Node.js 18以上
+- npm または yarn
+
+### インストール
+
+1. リポジトリをクローン:
+```bash
+git clone https://github.com/OSAMU456/-.git
+cd -
+```
+
+2. 依存関係をインストール:
+```bash
+npm install
+```
+
+3. 開発サーバーを起動:
+```bash
+npm run dev
+```
+
+4. ブラウザで [http://localhost:3000](http://localhost:3000) を開く
+
+---
+
+## 📁 プロジェクト構造
+
+詳細な構造は [`PROJECT_STRUCTURE.md`](PROJECT_STRUCTURE.md) を参照してください。
+
+```
+📦 美丽预约
+├── 📂 src/              # アプリケーションコード
+│   ├── app/            # ページ（Next.js App Router）
+│   ├── components/     # Reactコンポーネント
+│   ├── lib/           # ユーティリティ・データ
+│   └── types/         # TypeScript型定義
+├── 📂 public/          # 静的ファイル
+├── 📂 docs/            # ドキュメント
+├── 📂 deployment/      # デプロイ設定
+└── 📂 .vscode/         # VS Code設定
+```
+
+---
+
+## 📜 利用可能なコマンド
+
+| コマンド | 説明 |
+|---------|------|
+| `npm run dev` | 開発サーバー起動 |
+| `npm run build` | 本番ビルド |
+| `npm start` | 本番サーバー起動 |
+| `npm run lint` | コードチェック |
+
+---
+
+## 🚀 デプロイ
+
+### Vercel（推奨）
+
+このプロジェクトはVercelで簡単にデプロイできます：
+
+```bash
+# 変更をコミット
+git add .
+git commit -m "Update: ..."
+
+# GitHubにプッシュ（自動デプロイ）
+git push origin main
+```
+
+Vercelが自動的にデプロイを検出し、約1-2分で完了します。
+
+### Google Cloud Platform
+
+GCPへのデプロイ手順は [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) を参照してください。
+
+---
+
+## 📋 管理画面
+
+**アクセス**: `/admin`
+
+### 管理機能
+- 📅 予約管理
+- ✂️ サービス管理
+- 👥 スタッフ管理
+- 📊 統計ダッシュボード
+
+詳しい使い方は [`docs/ADMIN_GUIDE.md`](docs/ADMIN_GUIDE.md) を参照してください。
+
+---
+
+## 📚 ドキュメント
+
+| ファイル | 説明 |
+|---------|------|
+| [`PROJECT_STRUCTURE.md`](PROJECT_STRUCTURE.md) | プロジェクト構造の詳細 |
+| [`docs/ADMIN_GUIDE.md`](docs/ADMIN_GUIDE.md) | 管理画面の使い方 |
+| [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) | デプロイ詳細ガイド |
+| [`docs/QUICK_DEPLOY.md`](docs/QUICK_DEPLOY.md) | クイックデプロイ |
+
+---
+
+## 🎯 主要ページ
+
+| ページ | URL | 説明 |
+|--------|-----|------|
+| トップ | `/` | ヒーロー、人気サロン |
+| 検索 | `/search` | サロン一覧、フィルター |
+| サロン詳細 | `/salon/[id]` | サロン情報、予約 |
+| 管理画面 | `/admin` | ダッシュボード |
+
+---
+
+## 🔧 カスタマイズ
+
+### サロン情報の変更
+`src/lib/mockData.ts` を編集
+
+### スタイルの変更
+`src/app/globals.css` を編集
+
+### ページの追加
+`src/app/新しいページ/page.tsx` を作成
+
+詳細は [`PROJECT_STRUCTURE.md`](PROJECT_STRUCTURE.md) を参照してください。
+
+---
+
+## 🆘 トラブルシューティング
+
+### ビルドエラー
+```bash
+npm run build
+```
+でエラーを確認
+
+### ポートが使用中
+```bash
+# 別のポートで起動
+PORT=3001 npm run dev
+```
+
+### キャッシュクリア
+```bash
+rm -rf .next
+npm run dev
+```
+
+---
+
+## 📄 ライセンス
+
+MIT
+
+---
+
+## 🤝 貢献
+
+プルリクエストを歓迎します！
+
+1. このリポジトリをフォーク
+2. 機能ブランチを作成 (`git checkout -b feature/amazing-feature`)
+3. 変更をコミット (`git commit -m 'Add amazing feature'`)
+4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
+5. プルリクエストを開く
+
+---
+
+## 📞 サポート
+
+質問や問題がある場合は、GitHubでIssueを開いてください。
+
+---
+
+**🎉 美丽预约へようこそ！福岡で最高の美容院体験を提供します。**
 
 ## 项目概述 (Project Overview)
 
